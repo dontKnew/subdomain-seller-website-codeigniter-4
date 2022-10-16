@@ -49,12 +49,17 @@
     .pagination > li > a:active{
         color:white;
     }
+    .footer {
+        position: absolute;
+        bottom: 0px;
+        width: 100%
+    }
 </style>
 <body>
 <div class="wrapper">
     <div class="main-header">
         <div class="logo-header">
-            <a href="index.html" class="logo">
+            <a href="<?= base_url() ?>" class="logo">
                 E-Service Apartments
             </a>
             <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
@@ -66,44 +71,36 @@
         <nav class="navbar navbar-header navbar-expand-lg">
             <div class="container-fluid">
                 <!--start search bar-->
-                <form class="navbar-left navbar-form nav-search mr-md-3" action="">
-                    <div class="input-group">
-                        <input type="search" id="searchInput" placeholder="Search anything..." class="form-control">
-                        <div class="input-group-append">
-                                    <span class="input-group-text">
-                                        <i class="la la-search search-icon"></i>
-                                    </span>
-                        </div>
-                    </div>
-                </form>
+<!--                <form class="navbar-left navbar-form nav-search mr-md-3" action="">-->
+<!--                    <div class="input-group">-->
+<!--                        <input type="search" id="searchInput" placeholder="Search anything..." class="form-control">-->
+<!--                        <div class="input-group-append">-->
+<!--                                    <span class="input-group-text">-->
+<!--                                        <i class="la la-search search-icon"></i>-->
+<!--                                    </span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
                 <!--end search bar-->
 
                 <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
-                            <img src="<?= base_url("backend/img/profile.jpg") ?>" alt="user-img" width="36"
-                                 class="img-circle"><span>Global Height</span></span> </a>
+                            <img src="<?= base_url() . "/backend/img/admin_profile/" . esc($_SESSION['profile']) ?>" alt="user-img" width="36"
+                                 class="img-circle"><span<?= $_SESSION['name'] ?></span></span> </a>
                         <ul class="dropdown-menu dropdown-user">
                             <li>
                                 <div class="user-box">
-                                    <div class="u-img"><img src="<?= base_url("backend/img/profile.jpg") ?>" alt="user">
+                                    <div class="u-img"><img src="<?= base_url() . "/backend/img/admin_profile/" . esc($_SESSION['profile']) ?>" alt="user">
                                     </div>
                                     <div class="u-text">
-                                        <h4>Hizrian</h4>
-                                        <p class="text-muted">hello@themekita.com</p><a href="profile.html"
-                                                                                        class="btn btn-rounded btn-danger btn-sm">View
-                                            Profile</a></div>
+                                        <h4> <?= $_SESSION['name'] ?></h4>
+                                        <p class="text-muted"> <?= $_SESSION['email'] ?></p>
                                 </div>
                             </li>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><i class="ti-user"></i> My Profile</a>
-                            <a class="dropdown-item" href="#"></i> My Balance</a>
-                            <a class="dropdown-item" href="#"><i class="ti-email"></i> Inbox</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><i class="ti-settings"></i> Account Setting</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href=""<?= base_url("admin/logout") ?>""><i class="fa fa-power-off"></i> Logout</a>
+                            <a class="dropdown-item text-center" href=""<?= base_url("admin/logout") ?>""><i class="fa fa-power-off"></i> Logout</a>
                         </ul>
                         <!-- /.dropdown-user -->
                     </li>
@@ -115,12 +112,12 @@
         <div class="scrollbar-inner sidebar-wrapper">
             <div class="user">
                 <div class="photo">
-                    <img src="<?= base_url("backend/img/profile.jpg") ?>">
+                    <img src="<?= base_url() . "/backend/img/admin_profile/" . esc($_SESSION['profile']) ?>">
                 </div>
                 <div class="info">
                     <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                                     <span>
-                                        Global Height
+                                        <?= $_SESSION['name'] ?>
                                         <span class="user-level">Administrator</span>
                                     </span>
                     </a>
@@ -161,6 +158,18 @@
                         <i class="la la-table"></i>
                         <p>Highlight Apart.</p>
                         <span class="badge badge-info"><?php if(isset($highlightCount)): echo esc($highlightCount); endif; ?></span>
+                    </a>
+                </li>
+                <li class="nav-item <?php if(isset($profile) ){ echo $profile;} ?>">
+                    <a href="<?= base_url("admin/profile") ?>">
+                        <i class="la la-user-secret"></i>
+                        <p>Your Profile</p>
+                    </a>
+                </li>
+                <li class="nav-item <?php if(isset($change_password) ){ echo $change_password;} ?>">
+                    <a href="<?= base_url("admin/change-password") ?>">
+                        <i class="la la-lock"></i>
+                        <p>Change Password</p>
                     </a>
                 </li>
                 <a href="<?= base_url("admin/logout") ?>" alt="logout button" class="mx-4 my-4 btn btn-sm btn-outline-danger d-flex justify-content-center align-items-center">
@@ -212,33 +221,7 @@
 </body>
 </body>
 <script src="<?= base_url("backend/js/core/jquery.3.2.1.min.js") ?>"></script>
-<script>
-    /*$(document).ready(function(){
-        $("#searchInput").on("keyup", function(){
-            let text = $(this).val();
-            let tableName = $("#tableName").val();
-            let url = "<?php echo base_url()."/admin/search-engine/"?>"+tableName+"/"+text;
-            if (text !== "") {
-                $.ajax({
-                    url: url,
-                    type: "GET",
-                    cache: false,
-                    success: function (data) {
-                        $("#countrylist").html(data);
-                        $("#countrylist").fadeIn();
-                    },
-                    error: function () {
-                        console.warn("frontend ajax errors");
-                    }
-                });
-            }else {
-                $("#countrylist").fadeOut();
-            }
 
-
-        });
-    })*/
-</script>
 <script src="<?= base_url("backend/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js") ?>"></script>
 
 <script src="<?= base_url("backend/js/core/popper.min.js") ?>"></script>

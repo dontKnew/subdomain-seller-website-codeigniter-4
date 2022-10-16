@@ -42,7 +42,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="squareInput"> Password </label>
-                                <input type="password" name="password" class="form-control input-square" placeholder="Enter your password ">
+                                <input type="password" minlength="6" name="password" class="form-control input-square" placeholder="Enter your password ">
                             </div>
                             <div class="card-action">
                                 <button type="submit" class="btn btn-primary">Log In</button>

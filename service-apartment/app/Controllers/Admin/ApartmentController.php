@@ -64,6 +64,8 @@ class ApartmentController extends BaseController
                     $file->move("backend/img/apartment/original/", $name);
                     $_POST['image'] =  $name;
                     $data = array_map("strtolower", $_POST);
+
+
                     $apartment->save($data);
                     $session->setFlashdata("msg","Apartment add successfully");
                     return redirect()->route("admin/apartment");
