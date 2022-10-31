@@ -41,6 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $autoload['packages'] = array();
 
+$autoload['libraries'] = array('session','form_validation', 'pagi', 'upload','email','cart');
 /*
 | -------------------------------------------------------------------
 |  Auto-load Libraries
@@ -58,7 +59,6 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('session','form_validation','upload','email','cart');
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','cookie','validate_helper','sendmail');
+$autoload['helper'] = array('url','cookie','text', 'form', 'validate_helper','sendmail');
 
 /*
 | -------------------------------------------------------------------

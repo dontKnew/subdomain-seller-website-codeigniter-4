@@ -203,13 +203,13 @@
                                         <div class="form-group">
 
                                             <label>Youtube Embed Code</label>
-                                            <input type="text" name="youtube_url" value="" class="form-control" placeholder="rIO5hMLV5kk" required="">
+                                            <input type="text" name="youtube_url" value=" " class="form-control" placeholder="rIO5hMLV5kk" required="">
                                             <small>Hint : https://www.youtube.com/watch?v=<span class="text-success"> <strong>rIO5hMLV5kk</strong> </span></small>
 
                                         </div>
                                         <div class="form-group">
                                             <label>Map Embed Code </label>
-                                            <input type="text" name="google_map_link" value="" class="form-control" placeholder='1m12!1m8!1m3!1d5849.938147096442!2d79.13286085002807!3d29.32944585469947!3m2!1i1024!2i768!4f13.1!2m1!1ssantoshpur%20choi%2c%20near%20hanuman%20dham%2c%2c%20ramnagar%2c%20uttarakhand%20244715%2c%20india!5e0!3m2!1sen!2sus!4v1616481129523!5m2!1sen!2sus' required="">
+                                            <input type="text" name="google_map_link" value=" " class="form-control" placeholder='1m12!1m8!1m3!1d5849.938147096442!2d79.13286085002807!3d29.32944585469947!3m2!1i1024!2i768!4f13.1!2m1!1ssantoshpur%20choi%2c%20near%20hanuman%20dham%2c%2c%20ramnagar%2c%20uttarakhand%20244715%2c%20india!5e0!3m2!1sen!2sus!4v1616481129523!5m2!1sen!2sus' required="">
                                             <small>Hint 1 : How to get embed code ? <span class="text-danger"> <strong>click here</strong> </span></small><br>
                                             <small>Hint 2 : copy the code after ... pb ->  <span class="text-primary"> <strong>https://www.google.com/maps/embed?pb=</strong> </span></small>
                                         </div>

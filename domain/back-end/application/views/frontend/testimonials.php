@@ -1,7 +1,4 @@
 <?php $this->load->view('common_front/header');
-echo '<pre>';
-print_r($testimonial);
-echo '</pre>';
 ?>
 <section class="row final-inner-header" style="
         display: table;

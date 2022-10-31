@@ -1,30 +1,7 @@
-<!DOCTYPE html>
 <?php
-//  $comp=$this->db->where('status','Active')->where('domain', DOMAIN)->get('company')->row_array();
 $comp = $this->db->where('status', 'Active')->where('domain', DOMAIN)->get('company')->row_array();
 if (empty($comp)) {
-    echo "Your domain is not registered with us,  <a href='#'>Contact us</a> for register your domain <br> ";
-    exit;
-} else {
-    $this->db->trans_start();
-//    $textHome=$this->db->where('domain', DOMAIN)->get('home_customize')->row_array();
-//    $accommodation = $this->db->where('domain', DOMAIN)->get('accommodation')->row_array();
-//    $acustomize = $this->db->where('domain', DOMAIN)->get('accommodation_customize')->row_array();
-//
-//    $package = $this->db->where('domain', DOMAIN)->get('package')->row_array();
-//    $pcustomize = $this->db->where('domain', DOMAIN)->get('package_customize')->row_array();
-//
-//    $amenities = $this->db->where('domain', DOMAIN)->get('amenities')->row_array();
-//    $camenities = $this->db->where('domain', DOMAIN)->get('amenities_customize')->row_array();
-//
-//    $gallary = $this->db->where('domain', DOMAIN)->get('gallary')->row_array();
-//    $cgallery = $this->db->where('domain', DOMAIN)->get('gallery_customize')->row_array();
-    $chabout =$this->db->select("about_photo")->where(['domain'=>DOMAIN])->order_by('id','desc')->get('about_customize')->result_array();
-    $this->db->trans_complete();
-}
-
-if ($this->db->trans_status() === FALSE) {
-    echo "Database transaction failed";
+    echo "Your domain is not registered with us,  <a href='www.globalheight.com'>Contact us</a> for register your domain <br> ";
     exit;
 }
 
@@ -33,9 +10,13 @@ if ($this->db->trans_status() === FALSE) {
 <html>
 <head>
     <meta charset="UTF-8">
-    <title><?= $textHome['webpage_title'] ?></title>
+
+    <title><?= $title ?></title>
     <!-- reponsive meta-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="<?= $keywords ?>" name="keywords">
+    <meta content="<?= $description ?>" name="description">
+    <link rel="canonical" href="<?= current_url() ?>" />
     <!-- Bootstrap-->
     <link href= <?= base_url()."public/frontend/css/bootstrap.min.css" ?> rel="stylesheet">
     <link href= <?= base_url()."public/frontend/css/font-awesome.min.css" ?> rel="stylesheet">
@@ -66,7 +47,7 @@ if ($this->db->trans_status() === FALSE) {
 <section class="top-bar dhomev">
     <div class="container">
         <div class="pull-left left-infos contact-infos">
-            <div class="logo2"> <a href="index.html">
+            <div class="logo2"> <a href="/">
                     <img src="<?= base_url()."uploads/company/".$comp['logo']?>"> <h5> <?= $textHome['website_name'] ?></h5></a>
             </div>
         </div>
@@ -95,7 +76,7 @@ if ($this->db->trans_status() === FALSE) {
         </div>
         <div id="main-navigation" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="<?= base_url() ?>"><?= $textHome['home_menu'] ?></a></li>
+                <li><a href="<?= base_url("/") ?>"><?= $textHome['home_menu'] ?></a></li>
                 <li><a href="<?= base_url()."about" ?>">About</a></li>
                 <li><a href="<?=  base_url()."accommodation" ?>">Accommodation</a></li>
                 <li><a href="<?=  base_url()."amenities" ?>">Amenities</a></li>

@@ -30,6 +30,7 @@ class Slider extends CI_Controller
         $query = $this->db->select('*')->from('slider')->where("domain", $domain)->order_by('id', 'desc')->limit(20, ($page))->get();
         $num_rows = $this->db->order_by('id', 'desc')->where("domain", $domain)->get('slider')->num_rows();
         $data['links'] = $this->pagi->pagination1('admin/slider', $num_rows, 20);
+
         $data['slider'] = $query->result_array();
         $this->load->view('admin/slider/index', $data);
     }
@@ -182,7 +183,7 @@ class Slider extends CI_Controller
             $domain = strtolower($this->session->sessionDomain);
             $query = $this->db->select('*')->from('footer_facility')->where("domain", $domain)->order_by('id', 'desc')->limit(20,($page))->get();
             $num_rows = $this->db->order_by('id', 'desc')->where("domain", $domain)->get('footer_facility')->num_rows();
-            $data['links'] = $this->pagi->pagination1('admin/facility', $num_rows, 20);
+            $data['links'] = $this->pagi->pagination('admin/facility', $num_rows, 20);
             $data['facility'] = $query->result_array();
             $this->load->view('admin/slider/facility/index', $data);
         }catch (Exception $e){

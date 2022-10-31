@@ -24,8 +24,10 @@ class Testimonials extends CI_Controller
             $data['ctestimonial'] =$this->db->where(['domain'=>DOMAIN])->get('testinomial_customize')->row_array();
             $data['testimonial'] =$this->db->select('*')->where(['status'=>'Active','domain'=>DOMAIN])->order_by('id','desc')->get('testinomial')->result_array();
 
-
-
+            $data['seo_tags'] =$this->db->where(['page_name'=>'Testimonials','domain'=>DOMAIN])->get('seo_tags')->row_array();
+            $data['title'] = $data['ctestimonial']['webpage_title'];
+            $data['keywords'] = $data['seo_tags']['meta_keywords'];
+            $data['description'] = $data['seo_tags']['meta_description'];
             $this->load->view('frontend/testimonials', $data);
 
         }catch (Exception $e){

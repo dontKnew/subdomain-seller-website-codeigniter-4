@@ -19,7 +19,9 @@ class Contact extends CI_Controller
         $data['package'] =$this->db->select('name')->where(['status'=>'Active','domain'=>DOMAIN])->order_by('id','desc')->limit(10)->get('package')->result_array();
         $data['amenities'] =$this->db->select('name')->where(['status'=>'Active','domain'=>DOMAIN])->order_by('id','desc')->limit(10)->get('amenities')->result_array();
         $data['company']=$this->db->where('domain', DOMAIN)->get('company')->row_array();
+        $data['seo_tags'] =$this->db->where(['page_name'=>'Contact','domain'=>DOMAIN])->get('seo_tags')->row_array();
 
+        $data['title'] = "Resort-Contact";
         $this->load->view('frontend/contact', $data);
     }
 

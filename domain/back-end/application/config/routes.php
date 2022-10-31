@@ -2,14 +2,13 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
-
     $route['404_override'] =''; // default page will be here
     $route['translate_uri_dashes'] = FALSE; // if this true, you  call with controller and thats method
 
 // FRONT-END AREA
+    $route['default_controller'] = 'Home'; // front is controller name
 
-    $route['default_controller'] = 'frontend/Home'; // front is controller name
+    $route['/'] = 'Home'; // front is controller name
 
     $route['about']      =  'frontend/about';
 
@@ -154,5 +153,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     $route['admin/testinomial/customize']['post']='Testinomial/updateTestinomialData';
 
 
-    /*SEO TOOL*/
-    $route['admin/seotools']='Seotools/index';
+    /*SEO TAGS*/
+    $route['admin/seotags']='Seotools/index';
+    $route['admin/seotags/add']='Seotools/add';
+    $route['admin/seotags/edit/(:num)']='Seotools/edit/$1';
+    $route['admin/seotags/delete/(:num)']='Seotools/delete/$1';

@@ -30,8 +30,7 @@ class Company extends CI_Controller
         $num_rows = $this->db->order_by('id', 'desc')->get('company')->num_rows();
 
         $data['company'] = $query->result_array();
-
-        // $data['links'] = $this->pagi->pagination1('admin/company', $num_rows, 20);
+        $data['links'] = $this->pagi->pagination1('admin/company', $num_rows, 20);
 
         $this->load->view('admin/company/index', $data);
     }
@@ -65,10 +64,11 @@ class Company extends CI_Controller
 
                 $this->load->view('admin/company/add');
             } else {
-
+                $time = time();
                 if ($_FILES['logo']['name'] != '') {
-                    $journalName = str_replace(' ', '_', $_FILES['logo']['name']);
-                    $config['file_name'] = strtolower(time() . "_" . $journalName);
+                    $ext = pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);
+                    $config['file_name'] = strtolower("logo_".$time."." .$ext);
+
                     $config['upload_path'] = './uploads/company/';
                     $config['allowed_types'] = 'gif|jpg|png|JPG|JPEG|jpeg';
                     $this->upload->initialize($config);
@@ -76,8 +76,9 @@ class Company extends CI_Controller
                     $_POST['logo'] = $config['file_name'];
                 }
                 if ($_FILES['favicon']['name'] != '') {
-                    $journalName = str_replace(' ', '_', $_FILES['favicon']['name']);
-                    $config['file_name'] = strtolower(time() . "_" . $journalName);
+                    $ext = pathinfo($_FILES['favicon']['name'], PATHINFO_EXTENSION);
+                    $config['file_name'] = strtolower("favicon_".$time."." .$ext);
+
                     $config['upload_path'] = './uploads/company/';
                     $config['allowed_types'] = 'gif|jpg|png|JPG|JPEG|jpeg';
                     $this->upload->initialize($config);
@@ -166,6 +167,7 @@ class Company extends CI_Controller
             if ($this->form_validation->run() == FALSE) {
 
                 $data['company'] = $this->db->where('id', $id)->get('company')->row_array();
+
                 $this->load->view('admin/company/edit', $data);
             } else {
                 try {
@@ -173,26 +175,33 @@ class Company extends CI_Controller
                     if ($_FILES['logo']['name'] != '') {
 
                         $ext = pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);
-                        $config['file_name'] = strtolower("package_" . time() . "." . $ext);
+                        $config['file_name'] = strtolower("logo_".$time."." .$ext);
 
-                        $config['upload_path'] = './uploads/company/';
+                        $config['upload_path'] = 'uploads/company/';
                         $config['allowed_types'] = 'gif|jpg|png|JPG|JPEG|jpeg';
                         $this->upload->initialize($config);
                         $this->upload->do_upload('logo');
+                        if(file_exists("./uploads/company/" . $data1['logo'])){
+                            unlink("./uploads/company/" . $data1['logo']);
+                        }
                         $_POST['logo'] = $config['file_name'];
-                        unlink("./uploads/company/" . $data['logo']);
+
                     } else {
                         $_POST['logo'] = $data1['logo'];
                     }
                     if ($_FILES['favicon']['name'] != '') {
+
                         $ext = pathinfo($_FILES['favicon']['name'], PATHINFO_EXTENSION);
-                        $config['file_name'] = strtolower("favicon_" . time() . "." . $ext);
-                        $config['upload_path'] = './uploads/company/';
+                        $config['file_name'] = strtolower("favicon_".$time."." .$ext);
+
+                        $config['upload_path'] = 'uploads/company/';
                         $config['allowed_types'] = 'gif|jpg|png|JPG|JPEG|jpeg';
                         $this->upload->initialize($config);
                         $this->upload->do_upload('favicon');
+                        if(file_exists("./uploads/company/" . $data1['favicon'])){
+                            unlink("./uploads/company/" . $data1['favicon']);
+                        }
                         $_POST['favicon'] = $config['file_name'];
-                        unlink("./uploads/company/" . $data['favicon']);
                     } else {
                         $_POST['favicon'] = $data1['favicon'];
                     }

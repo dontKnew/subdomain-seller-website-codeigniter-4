@@ -31,9 +31,14 @@ class AccommodationType extends CI_Controller
     public function index()
     {
         try {
-            $domain = strtolower($this->session->sessionDomain);
-            $query = $this->db->select('room_facility.*')->from('room_facility')->where("domain",$domain)->order_by('id', 'desc')->get();
-            $data['room_facility'] = $query->result_array();
+            $page =(isset($_GET['page'])) ? $_GET['page'] : 0;
+            $domain = $this->session->sessionDomain;
+            $this->db->where("domain", strtolower($domain));
+            $query=$this->db->select('room_facility.*')->from('room_facility')->order_by('id','desc')->limit(20,($page))->get();
+            $num_rows=$this->db->order_by('id', 'desc')->get('room_facility')->num_rows();
+            $data['room_facility']=$query->result_array();
+            $data['links']=$this->pagi->pagination1('admin/room-facility',$num_rows,20);
+
             $this->load->view('admin/accommodation/room-facility/index', $data);
         }catch (Exception $e){
             echo 'Error : '. $e->getMessage();
@@ -53,7 +58,7 @@ class AccommodationType extends CI_Controller
                 } else {
                     $domain = strtolower($this->session->sessionDomain);
                     $_POST['domain'] = $domain;
-                    if ($this->db->insert('room_facility', $_POST)) {
+                    if ($this->db->insert('room_overview', $_POST)) {
                         $this->session->set_flashdata('msg', 'Room Facility Successfully Added');
                         return redirect(base_url('admin/room-facility'), 'refresh');
                     } else {
@@ -85,7 +90,7 @@ class AccommodationType extends CI_Controller
     public function deleteFacility($id = '')
     {
         try {
-            if ($this->db->where('id', $id)->delete('room_facility')) {
+            if ($this->db->where('id', $id)->delete('room_overview')) {
                 $this->session->set_flashdata('msg', 'Success Deleted facility');
             } else {
                 $this->session->set_flashdata('err', 'Please try After Sometimes...');
@@ -102,9 +107,15 @@ class AccommodationType extends CI_Controller
     public function RoomOverview()
     {
         try {
-            $domain = strtolower($this->session->sessionDomain);
-            $query = $this->db->select('room_overview.*')->from('room_overview')->where("domain",$domain)->order_by('id', 'desc')->get();
-            $data['room_overview'] = $query->result_array();
+
+            $page =(isset($_GET['page'])) ? $_GET['page'] : 0;
+            $domain = $this->session->sessionDomain;
+            $this->db->where("domain", strtolower($domain));
+            $query=$this->db->select('room_overview.*')->from('room_overview')->order_by('id','desc')->limit(20,($page))->get();
+            $num_rows=$this->db->order_by('id', 'desc')->get('room_overview')->num_rows();
+            $data['room_overview']=$query->result_array();
+            $data['links']=$this->pagi->pagination1('admin/room-overview',$num_rows,20);
+
             $this->load->view('admin/accommodation/room-overview/index', $data);
         }catch (Exception $e){
             echo 'Error : '. $e->getMessage();
@@ -168,17 +179,13 @@ class AccommodationType extends CI_Controller
     public function RoomPhoto()
     {
         try {
-
-
-//            $page = (isset($_GET['page'])) ? $_GET['page'] : 0;
-            $domain = strtolower($this->session->sessionDomain);
-                    $query = $this->db->select('room_preview_photo.*')->from('room_preview_photo')->where("domain",$domain)->order_by('id', 'desc')->get();
-                $data['room_photo'] = $query->result_array();
-//
-//            $query = $this->db->select('*')->from('room_preview_photo')->where("domain", $domain)->order_by('id', 'desc')->limit(5, ($page))->get();
-//            $num_rows = $this->db->order_by('id', 'desc')->where("domain", $domain)->get('room_preview_photo')->num_rows();
-//            $data['links'] = $this->pagi->pagination1('admin/room-photo', $num_rows, 20);
-//            $data['room_photo'] = $query->result_array();
+            $page =(isset($_GET['page'])) ? $_GET['page'] : 0;
+            $domain = $this->session->sessionDomain;
+            $this->db->where("domain", strtolower($domain));
+            $query=$this->db->select('room_preview_photo.*')->from('room_preview_photo')->order_by('id','desc')->limit(20,($page))->get();
+            $num_rows=$this->db->order_by('id', 'desc')->get('room_preview_photo')->num_rows();
+            $data['room_preview_photo']=$query->result_array();
+            $data['links']=$this->pagi->pagination1('admin/room-photo',$num_rows,20);
 
             $this->load->view('admin/accommodation/room-photo/index', $data);
         }catch (Exception $e){

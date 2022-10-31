@@ -26,6 +26,11 @@ class Amenities extends CI_Controller
 
             $data['cabout'] =$this->db->where(['domain'=>DOMAIN])->order_by('id','desc')->get('about_customize')->result_array();
             $data['point_word'] =$this->db->where(['status'=>'Active','domain'=>DOMAIN])->order_by('id','desc')->get('about_point_word')->result_array();
+
+            $data['seo_tags'] =$this->db->where(['page_name'=>'Amenities','domain'=>DOMAIN])->get('seo_tags')->row_array();
+            $data['title'] = $data['camenities'][0]['webpage_title'];
+            $data['keywords'] = $data['seo_tags']['meta_keywords'];
+            $data['description'] = $data['seo_tags']['meta_description'];
             $this->load->view('frontend/amenities', $data);
         }catch (Exception $e){
             echo "Error : ". $e->getMessage();

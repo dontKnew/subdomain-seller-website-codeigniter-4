@@ -6,17 +6,17 @@
 
 <div class="page-container list-menu-view">
 
-<!--Leftbar Start Here -->
+    <!--Leftbar Start Here -->
 
-<?php $this->load->view('common/sidebar')?>
+    <?php $this->load->view('common/sidebar')?>
 
 
 
     <div class="page-content">
 
-    <!--Topbar Start Here -->
+        <!--Topbar Start Here -->
 
-    <?php $this->load->view('common/header') ?>
+        <?php $this->load->view('common/header') ?>
 
         <div class="main-container">
 
@@ -28,13 +28,13 @@
 
                         <?php if(validation_errors()!=''){?>
 
-                    <div class="alert alert-danger alert-dismissible">
+                            <div class="alert alert-danger alert-dismissible">
 
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 
-                        <?php echo validation_errors(); ?>
+                                <?php echo validation_errors(); ?>
 
-                    </div>
+                            </div>
 
                         <?php }?>
 
@@ -72,32 +72,32 @@
 
                 </div>
 
-                 <?php
+                <?php
 
-                    if($this->session->flashdata('msg')!=''){
+                if($this->session->flashdata('msg')!=''){
 
-                        echo '<div class="alert alert-success alert-dismissible">
+                    echo '<div class="alert alert-success alert-dismissible">
 
                               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 
                               <strong>'.$this->session->flashdata('msg').'</strong> 
 
                             </div>';
-                        unset($_SESSION['msg']);
+                    unset($_SESSION['msg']);
 
-                    }
+                }
 
-                    if($this->session->flashdata('err')!=''){
+                if($this->session->flashdata('err')!=''){
 
-                        echo '<div class="alert alert-danger alert-dismissible">
+                    echo '<div class="alert alert-danger alert-dismissible">
 
                               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 
                               <strong>'.$this->session->flashdata('err').'</strong> 
 
                             </div>';
-                        unset($_SESSION['err']);
-                    }
+                    unset($_SESSION['err']);
+                }
 
                 ?>
 
@@ -105,7 +105,7 @@
 
                     <div class="col-md-12 ">
 
-                    <div class="box-widget widget-module">
+                        <div class="box-widget widget-module">
 
                             <div class="widget-head clearfix">
 
@@ -121,19 +121,19 @@
 
                                     <form action="<?= base_url('admin/company/edit/'.$company['id'])?>" method="post" enctype="multipart/form-data">
 
-                                         <legend>Edit company</legend>
+                                        <legend>Edit company</legend>
 
 
 
 
 
-                                     <div class="form-group">
+                                        <div class="form-group">
 
-                                        <label>Company Name</label>
+                                            <label>Company Name</label>
 
-                                         <input type="text" name="name" value="<?= ucwords($company['name'])?>" class="form-control"  required="">
+                                            <input type="text" name="name" value="<?= ucwords($company['name'])?>" class="form-control"  required="">
 
-                                     </div>
+                                        </div>
 
                                         <?php
                                         function get_domain($host){
@@ -148,66 +148,66 @@
                                         }
                                         ?>
 
-                                       <div class="form-group">
+                                        <div class="form-group">
 
-                                        <label>Company Domain </label>
-                                           <div class="input-group">
-                                               <span class="input-group-addon" id="basic-addon2">http://</span>
-                                               <input type="text" aria-describedby="basic-addon2" name="domain" value="<?=   strstr($company['domain'], '.', true); ?>" class="form-control"  required="">
-                                               <span class="input-group-addon" id="basic-addon2"><?= get_domain(DOMAIN) ?></span>
-                                           </div>
-                                           <small>Example : https://www.<span class="text-warning">companydomain</span>.<?= get_domain(DOMAIN) ?></small>
-                                     </div>
-
-
+                                            <label>Company Domain </label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="basic-addon2">http://</span>
+                                                <input type="text" aria-describedby="basic-addon2" name="domain" value="<?=   strstr($company['domain'], '.', true); ?>" class="form-control"  required="">
+                                                <span class="input-group-addon" id="basic-addon2"><?= get_domain(DOMAIN) ?></span>
+                                            </div>
+                                            <small>Example : https://www.<span class="text-warning">companydomain</span>.<?= get_domain(DOMAIN) ?></small>
+                                        </div>
 
 
-                                      <div class="form-group">
-
-                                        <label>Email </label>
-
-                                         <input type="email" name="email" value="<?= $company['email'];?>" class="form-control"  required="">
-
-                                     </div>
 
 
-                                      <div class="form-group">
+                                        <div class="form-group">
 
-                                        <label>Company Mobile</label>
+                                            <label>Email </label>
 
-                                         <input type="text" name="mobile" value="<?= $company['mobile'];?>" class="form-control"  required="">
+                                            <input type="email" name="email" value="<?= $company['email'];?>" class="form-control"  required="">
 
-                                     </div>
+                                        </div>
 
 
-                                     <div class="form-group">
+                                        <div class="form-group">
 
-                                        <label>Company Address</label>
+                                            <label>Company Mobile</label>
 
-                                         <textarea  name="address" class="form-control full-editor"  required=>
+                                            <input type="text" name="mobile" value="<?= $company['mobile'];?>" class="form-control"  required="">
+
+                                        </div>
+
+
+                                        <div class="form-group">
+
+                                            <label>Company Address</label>
+
+                                            <textarea  name="address" class="form-control full-editor"  required=>
                                              <?= $company['address'];?>
                                          </textarea>
 
-                                     </div>
+                                        </div>
 
 
-                                    <div class="form-group">
+                                        <div class="form-group">
 
-                                        <label>Company Logo</label>
+                                            <label>Company Logo</label>
 
-                                         <input type="file" name="logo" value="<?= $company['logo'];?>" class="form-control" >
-                                        <img src="<?= base_url('uploads/company/'.$company['logo'])?>" alt="<?= $company['name'];?>" width="50" height="auto">
-                                     </div>
+                                            <input type="file" name="logo" class="form-control" >
+                                            <img src="<?= base_url('uploads/company/'.$company['logo'])?>" alt="<?= $company['name'];?>" width="50" height="auto">
+                                        </div>
 
 
-                                     <div class="form-group">
+                                        <div class="form-group">
 
-                                        <label>Company Favicon</label>
+                                            <label>Company Favicon</label>
 
-                                         <input type="file" name="favicon" value="<?= $company['favicon'];?>" class="form-control"  >
-                                         <img src="<?= base_url('uploads/company/'.$company['logo'])?>" alt="<?= $company['name'];?>" width="50" height="auto">
+                                            <input type="file" name="favicon"class="form-control"  >
+                                            <img src="<?= base_url('uploads/company/'.$company['favicon'])?>" alt="<?= $company['name'];?>" width="50" height="auto">
 
-                                     </div>
+                                        </div>
 
                                         <div class="form-group">
 
@@ -224,21 +224,21 @@
                                         </div>
 
 
-                                     <div class="form-group">
+                                        <div class="form-group">
 
-                                        <label> Status</label>
+                                            <label> Status</label>
 
-                                         <select class="form-control" name="status">
+                                            <select class="form-control" name="status">
 
-                                             <option <?php if(ucwords($company['status'])=='Active'){ echo 'selected'; }?>>Active</option>
+                                                <option <?php if(ucwords($company['status'])=='Active'){ echo 'selected'; }?>>Active</option>
 
-                                             <option <?php if(ucwords($company['status'])=='Inactive'){ echo 'selected'; }?>>Inactive</option>
+                                                <option <?php if(ucwords($company['status'])=='Inactive'){ echo 'selected'; }?>>Inactive</option>
 
-                                         </select>
+                                            </select>
 
-                                     </div>
+                                        </div>
 
-                                     <input type="submit" name="" class="btn btn-warning" value="Update">
+                                        <input type="submit" name="" class="btn btn-warning" value="Update">
 
                                     </form>
 
@@ -250,18 +250,18 @@
 
                     </div>
 
-                    </div>
+                </div>
 
-                  <?php $this->load->view('common/foot'); ?>
+                <?php $this->load->view('common/foot'); ?>
+
+            </div>
 
         </div>
 
-    </div>
+
+
+        <?php $this->load->view('common/footer')?>
 
 
 
-    <?php $this->load->view('common/footer')?>
-
-
-
-<script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.7/summernote.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/summernote/0.8.7/summernote.js"></script>

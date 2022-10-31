@@ -136,6 +136,8 @@
                                 </table>
 
                                 <div class="dt-pagination">
+                                    <?= $links?>
+
                                 </div>
 
                             </div>

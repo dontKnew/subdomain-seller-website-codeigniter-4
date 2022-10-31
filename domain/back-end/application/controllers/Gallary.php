@@ -40,13 +40,9 @@ class Gallary extends CI_Controller
         $page =(isset($_GET['page'])) ? $_GET['page'] : 0;
         $domain = $this->session->sessionDomain;
         $this->db->where("domain", strtolower($domain));
-
         $query=$this->db->select('gallary.*')->from('gallary')->order_by('id','desc')->limit(20,($page))->get();
-
         $num_rows=$this->db->order_by('id', 'desc')->get('gallary')->num_rows();
-
         $data['gallary']=$query->result_array();
-
         $data['links']=$this->pagi->pagination1('admin/gallary',$num_rows,20);
 
         $this->load->view('admin/gallary/index',$data);

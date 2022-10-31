@@ -21,6 +21,10 @@ class Home extends CI_Controller
         $data['facility'] =$this->db->where(['status'=>'Active','domain'=>DOMAIN])->order_by('id','desc')->get('footer_facility')->result_array();
         $data['package'] =$this->db->select('name')->where(['status'=>'Active','domain'=>DOMAIN])->order_by('id','desc')->limit(10)->get('package')->result_array();
         $data['amenities'] =$this->db->select('name')->where(['status'=>'Active','domain'=>DOMAIN])->order_by('id','desc')->limit(10)->get('amenities')->result_array();
+        $data['seo_tags'] =$this->db->where(['page_name'=>'Home','domain'=>DOMAIN])->get('seo_tags')->row_array();
+        $data['title'] = $data['textHome']['webpage_title'];
+        $data['keywords'] = $data['seo_tags']['meta_keywords'];
+        $data['description'] = $data['seo_tags']['meta_description'];
 
         $this->load->view('frontend/index', $data);
     }

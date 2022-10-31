@@ -23,6 +23,10 @@ class Gallery extends CI_Controller
         $data['gallery_type'] =$this->db->select('*')->where(['status'=>'Active','domain'=>DOMAIN])->order_by('id','desc')->get('gallery_type')->result_array();
         $data['gallery'] =$this->db->select('*')->where(['status'=>'Active','domain'=>DOMAIN])->order_by('id','desc')->get('gallary')->result_array();
 
+        $data['seo_tags'] =$this->db->where(['page_name'=>'Photo Gallery','domain'=>DOMAIN])->get('seo_tags')->row_array();
+        $data['title'] = $data['cgallery']['webpage_title'];
+        $data['keywords'] = $data['seo_tags']['meta_keywords'];
+        $data['description'] = $data['seo_tags']['meta_description'];
         $this->load->view('frontend/gallery', $data);
     }
 

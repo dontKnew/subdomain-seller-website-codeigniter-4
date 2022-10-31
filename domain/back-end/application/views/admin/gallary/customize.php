@@ -117,7 +117,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="">Gallery Photo</label>
-                                            <input type="file"  name="gallery_photo" class="form-control" placeholder="gallery photo" required>
+                                            <input type="file"  name="gallery_photo" class="form-control" placeholder="gallery photo">
                                             <img src="<?= base_url()."uploads/gallary/".$data[0]->gallery_photo; ?>" alt="gallery-photo" width="150" height="100">
                                         </div>
                                         <div class="form-group">

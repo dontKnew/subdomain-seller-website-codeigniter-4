@@ -100,7 +100,7 @@
                                 </div>
                             </li>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-center" href=""<?= base_url("admin/logout") ?>""><i class="fa fa-power-off"></i> Logout</a>
+                            <a class="dropdown-item text-center" href="<?= base_url("admin/logout") ?>"><i class="fa fa-power-off"></i> Logout</a>
                         </ul>
                         <!-- /.dropdown-user -->
                     </li>

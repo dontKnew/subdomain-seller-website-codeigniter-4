@@ -11,7 +11,13 @@
     <link rel="stylesheet" href="<?= base_url("backend/css/ready.css") ?>">
     <link rel="stylesheet" href="<?= base_url("backend/css/demo.css") ?>">
 </head>
-
+<style>
+    .footer {
+        position: absolute;
+        bottom: 5px;
+        width: 100%
+    }
+</style>
 <body style="background-color: #0f6674;">
 <div class="wrapper">
 

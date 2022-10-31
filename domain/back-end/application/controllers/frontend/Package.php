@@ -23,7 +23,10 @@ class Package extends CI_Controller
             $data['inclusions'] =$this->db->select('*')->where(['domain'=>DOMAIN])->order_by('id','desc')->get('package_inclusions')->result_array();
             $data['cpackage'] =$this->db->where(['domain'=>DOMAIN])->get('package_customize')->result_array();
 
-
+            $data['seo_tags'] =$this->db->where(['page_name'=>'Package','domain'=>DOMAIN])->get('seo_tags')->row_array();
+            $data['title'] = $data['cpackage'][0]['webpage_title'];
+            $data['keywords'] = $data['seo_tags']['meta_keywords'];
+            $data['description'] = $data['seo_tags']['meta_description'];
             $this->load->view('frontend/package', $data);
 
         }catch (Exception $e){
